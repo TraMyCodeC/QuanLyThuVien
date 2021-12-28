@@ -40,7 +40,6 @@ import javafx.stage.Stage;
  */
 public class TraCuuSachController implements Initializable {
     @FXML private TableView<Sach> tbSach;
-    @FXML private ComboBox cb;
     @FXML private Button btnHome;
     @FXML private Button btnSearch;
     @FXML private TextField txtTen;
@@ -66,8 +65,8 @@ public class TraCuuSachController implements Initializable {
       
           this.tbSach.setItems(filterList);
           filterList.predicateProperty().bind(Bindings.createObjectBinding(()->
-          Sach->Sach.getTenSach().contains(txtTen.getText())&&
-                  Sach.getTacGia().contains(txtTacGia.getText())&&
+          Sach->Sach.getTenSach().toLowerCase().contains(txtTen.getText().toLowerCase())&&
+                  Sach.getTacGia().toLowerCase().contains(txtTacGia.getText().toLowerCase())&&
                   Sach.getMaDM().contains(txtDanhMuc.getText())&&
                   Sach.getNamXuat().contains(txtNam.getText()),
                   txtTen.textProperty(),txtTacGia.textProperty(),

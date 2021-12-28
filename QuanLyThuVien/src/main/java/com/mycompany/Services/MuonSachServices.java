@@ -7,9 +7,11 @@ package com.mycompany.Services;
 
 import com.mycompany.Pojo.Sach;
 import com.mycompany.config.JDBC;
+import com.mycompany.config.Ultils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -70,5 +72,27 @@ public class MuonSachServices {
             return 0;
         else
             return 1;
+    }
+    public static int ktMaDG(String id) throws SQLException//mã trống thì trả về 0,ngược lại trả về 1
+    {
+        
+        if("".equals(id))
+            return 0;
+        int kt=0;
+        int dem=0;
+        int ma=Integer.parseInt(id);
+         Connection conn=JDBC.getConn();
+         PreparedStatement stm=conn.prepareStatement("SELECT count(*) FROM thedocgia where MaDG=?");
+         stm.setInt(1,ma);
+         ResultSet rs = stm.executeQuery();
+          while(rs.next())
+               dem=rs.getInt(1);
+            if (dem > 0) {
+                kt=1;
+            }
+            else
+                kt=0;
+            stm.close();
+            return kt;
     }
 }
