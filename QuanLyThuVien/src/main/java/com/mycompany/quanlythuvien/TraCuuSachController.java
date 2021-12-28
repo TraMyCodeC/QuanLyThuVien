@@ -66,9 +66,12 @@ public class TraCuuSachController implements Initializable {
       
           this.tbSach.setItems(filterList);
           filterList.predicateProperty().bind(Bindings.createObjectBinding(()->
-          Sach->Sach.getTenSach().contains(txtTen.getText())&&Sach.getTacGia().contains(txtTacGia.getText())&&
-                  Sach.getMaDM().contains(txtDanhMuc.getText())&&Sach.getNamXuat().contains(txtNam.getText()),
-                  txtTen.textProperty(),txtTacGia.textProperty(),txtDanhMuc.textProperty(),txtNam.textProperty()
+          Sach->Sach.getTenSach().contains(txtTen.getText())&&
+                  Sach.getTacGia().contains(txtTacGia.getText())&&
+                  Sach.getMaDM().contains(txtDanhMuc.getText())&&
+                  Sach.getNamXuat().contains(txtNam.getText()),
+                  txtTen.textProperty(),txtTacGia.textProperty(),
+                  txtDanhMuc.textProperty(),txtNam.textProperty()
           ));
           
     }
