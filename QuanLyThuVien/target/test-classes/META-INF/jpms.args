@@ -1,4 +1,0 @@
---patch-module
-com.mycompany.quanlythuvien=_
---add-reads
-com.mycompany.quanlythuvien=ALL-UNNAMED

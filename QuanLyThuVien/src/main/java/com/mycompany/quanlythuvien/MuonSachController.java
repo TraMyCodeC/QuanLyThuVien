@@ -8,14 +8,14 @@ package com.mycompany.quanlythuvien;
 import com.mycompany.Pojo.Sach;
 import com.mycompany.Services.MuonSachServices;
 import com.mycompany.Services.SachServices;
-import com.mycompany.config.JDBC;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,11 +31,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import tornadofx.control.DateTimePicker;
 
 /**
  *
@@ -43,6 +45,7 @@ import javafx.stage.Stage;
  */
 public class MuonSachController implements Initializable {
     @FXML private TableView<Sach> tbSach;
+    @FXML private Label lbTime;
     @FXML private Button btnHome;
     @FXML private Button btnSave;
     @FXML private TextField txtId;
@@ -51,7 +54,7 @@ public class MuonSachController implements Initializable {
     @FXML private TextField txtNam;
     @FXML private TextField txtDanhMuc;
     @FXML private Button btnThemSach;
-    @FXML private TextField txtNgayMuon;
+    @FXML private DateTimePicker txtNgayMuon;
     private static int count=0;
       private Stage stage;
       private Scene scene;
@@ -59,6 +62,7 @@ public class MuonSachController implements Initializable {
         @Override
       public void initialize(URL url, ResourceBundle rb)
       {
+          currentTime();
           SachServices svc= new SachServices();
           this.LoadTable();
            ObservableList<Sach> list = null;
@@ -121,7 +125,12 @@ public class MuonSachController implements Initializable {
                     }
                         else
                         {
-                           //
+                            Sach book=tbSach.getSelectionModel().getSelectedItem();
+                                                  Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                             alert.setTitle("Message");
+                             alert.setHeaderText("sach mượn"+book.getTenSach());
+                             alert.showAndWait();
+                          
                         }
                }
              }
@@ -178,4 +187,58 @@ public class MuonSachController implements Initializable {
                               count=0;                   
        }
      }
-}
+     public void currentTime()
+     {
+         Thread clock= new Thread(){
+              @Override
+              public void run(){
+              for (;;) {
+                  try{
+                     
+                      Calendar cal = Calendar.getInstance();
+                      int month=cal.get(Calendar.MONTH);
+                      int year=cal.get(Calendar.MONTH);
+                      int day=cal.get(Calendar.MONTH);
+                      
+                      int second = cal.get(Calendar.SECOND);
+                      int minute = cal.get(Calendar.MINUTE);
+                      int hour= cal.get(Calendar.HOUR_OF_DAY);
+                       Platform.runLater(() -> {
+                            lbTime.setText(day + "/"+month+"/"+year+ " "+hour + ":" + minute + ":" + second);
+                       });     
+                      Thread.sleep(1000);
+//                      throw new UnsupportedOperationException("Not supported yet.");
+                      //To change body of generated methods, choose Tools | Templates.
+                  } catch (InterruptedException ex) {
+                      Logger.getLogger(MuonSachController.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+              }
+              }};
+         clock.start();
+     }
+  }
+//        @Override
+//        public void run() {
+//            for (;;) {
+//                
+//                    Calendar cal = Calendar.getInstance();
+//                    int month=cal.get(Calendar.MONTH);
+//                    int year=cal.get(Calendar.MONTH);
+//                    int day=cal.get(Calendar.MONTH);
+//                    
+//                    int second = cal.get(Calendar.SECOND);
+//                    int minute = cal.get(Calendar.MINUTE);
+//                    int hour= cal.get(Calendar.HOUR);
+//                    lbTime.setText(day + "/"+month+"/"+year+ " "+hour + ":" + minute + ":" + second);
+//                    try {
+//                    sleep(1000);
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(MuonSachController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        }
+//         });
+//    };
+//    clock.start();
+   
+
