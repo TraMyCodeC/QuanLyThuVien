@@ -4,14 +4,11 @@
  * and open the template in the editor.
  */
 package com.mycompany.Services;
-
-import com.mycompany.Pojo.Sach;
 import com.mycompany.config.JDBC;
-import com.mycompany.config.Ultils;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

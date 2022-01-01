@@ -10,7 +10,7 @@
          <children>
             <AnchorPane layoutX="241.0" prefHeight="246.0" prefWidth="236.0">
                <children>
-                  <Button fx:id="btnTraSach" layoutX="72.0" layoutY="94.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="106.0" text="Trả sách" />
+                  <Button fx:id="btnTraSach" layoutX="72.0" layoutY="94.0" mnemonicParsing="false" onAction="#switchToTraSach" prefHeight="58.0" prefWidth="106.0" text="Trả sách" />
                </children>
             </AnchorPane>
             <Button fx:id="btnMuonSach" layoutX="66.0" layoutY="94.0" mnemonicParsing="false" onAction="#switchToMuonSach" prefHeight="58.0" prefWidth="106.0" text="Mượn sách" />
