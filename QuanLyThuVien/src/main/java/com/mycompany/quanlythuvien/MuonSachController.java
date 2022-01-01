@@ -8,10 +8,16 @@ package com.mycompany.quanlythuvien;
 import com.mycompany.Pojo.Sach;
 import com.mycompany.Services.MuonSachServices;
 import com.mycompany.Services.SachServices;
+import com.mycompany.config.JDBC;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,9 +34,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -55,7 +59,7 @@ public class MuonSachController implements Initializable {
     @FXML private TextField txtDanhMuc;
     @FXML private Button btnThemSach;
     @FXML private DateTimePicker txtNgayMuon;
-    private static int count=0;
+    private static List<Integer>dsTra=new ArrayList<>();
       private Stage stage;
       private Scene scene;
       private Parent root;
@@ -86,6 +90,7 @@ public class MuonSachController implements Initializable {
    @FXML
    private void switchToNhanVienGUI(ActionEvent event) throws IOException
    {
+       dsTra.clear();
        root=FXMLLoader.load(getClass().getResource("NhanVienGui.fxml"));
                 stage=(Stage)((Node)event.getSource()).getScene().getWindow();
                 scene= new Scene(root,529,374);
@@ -95,8 +100,7 @@ public class MuonSachController implements Initializable {
    @FXML
    private void themSach() throws SQLException
    {
-       if(count!=5)
-       {
+      
            if(MuonSachServices.ktMaDG(txtId.getText())==0)
        {
            Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -116,33 +120,82 @@ public class MuonSachController implements Initializable {
                 }
                 else
                 {
-                    if(MuonSachServices.ktSoSachNguoiMuon(id)!=MuonSachServices.ktSoSachDaTra(id))
-                    {
-                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                   if(MuonSachServices.ktSoSachNguoiMuon(id)==MuonSachServices.ktSoSachDaTra(id))
+                   {
+                       if(dsTra.size()>0)
+                       {
+                         if(ktTraTT(id)==0)
+                             dsTra.add(id);
+                       }
+                       else
+                           dsTra.add(id);
+                   }
+                   if(dsTra.contains(id))
+                   {
+                       if(MuonSachServices.ktSoSachNguoiMuon(id)==5)
+                       {
+                           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                             alert.setTitle("Message");
+                             alert.setHeaderText("Chỉ được mượn 5 quyển");
+                             alert.showAndWait();
+                       }
+                       else
+                       {
+                            ObservableList<Sach> items;
+                           items = tbSach.getSelectionModel().getSelectedItems();
+                           Sach book=tbSach.getSelectionModel().getSelectedItem();
+                           if(items.isEmpty())
+                           {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                 alert.setTitle("Message");
+                                 alert.setHeaderText("Vui lòng chọn sách mượn");
+                                 alert.showAndWait(); 
+                           }
+                           else
+                           {
+                               try
+                               {
+                             Connection conn=JDBC.getConn();
+                             String sql="Insert into muonsach(MaDG,MaSach,NgayMuon) Values(?,?,?)";
+                             PreparedStatement pr=conn.prepareStatement(sql);
+                             pr.setInt(1,id);
+                             pr.setInt(2,book.getMaSach());
+                             pr.setObject(3,txtNgayMuon.getDateTimeValue());
+                             int dem=pr.executeUpdate();
+                             if(dem>0)
+                             {
+                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                 alert.setTitle("Message");
+                                 alert.setHeaderText("Mượn thành công");
+                                 alert.showAndWait();
+                             }
+                             else
+                             {
+                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                 alert.setTitle("Message");
+                                 alert.setHeaderText("Mượn không thành công");
+                                 alert.showAndWait(); 
+                             }}
+                               catch(SQLIntegrityConstraintViolationException ex)
+                               {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                 alert.setTitle("Message");
+                                 alert.setHeaderText("Sách đã mượn rồi");
+                                 alert.showAndWait(); 
+                               }
+                           }
+                       }
+                   }
+                   else
+                   {
+                       Alert alert = new Alert(Alert.AlertType.INFORMATION);
                              alert.setTitle("Message");
                              alert.setHeaderText("Vui lòng trả hết sách đã mượn");
                              alert.showAndWait();
-                    }
-                        else
-                        {
-                            Sach book=tbSach.getSelectionModel().getSelectedItem();
-                                                  Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                             alert.setTitle("Message");
-                             alert.setHeaderText("sach mượn"+book.getTenSach());
-                             alert.showAndWait();
-                          
-                        }
-               }
+                   }
+                }
              }
-       }
-       else
-       {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                 alert.setTitle("Message");
-                                 alert.setHeaderText("Chỉ được mượn 5 quyển");
-                                 alert.showAndWait(); 
-       }
-    }
+   }
      private void LoadTable()
     {
         TableColumn colMa= new TableColumn("Mã sách");
@@ -178,14 +231,7 @@ public class MuonSachController implements Initializable {
      @FXML
      private void saveFile()
      {
-          if(count!=0)
-       {
-          Alert alert = new Alert(AlertType.CONFIRMATION, "Bạn có muốn lưu thông tin này không??", ButtonType.YES, ButtonType.NO);
-           alert.showAndWait();
-
-    if (alert.getResult() == ButtonType.YES)
-                              count=0;                   
-       }
+        ///
      }
      public void currentTime()
      {
@@ -197,8 +243,8 @@ public class MuonSachController implements Initializable {
                      
                       Calendar cal = Calendar.getInstance();
                       int month=cal.get(Calendar.MONTH);
-                      int year=cal.get(Calendar.MONTH);
-                      int day=cal.get(Calendar.MONTH);
+                      int year=cal.get(Calendar.YEAR);
+                      int day=cal.get(Calendar.DATE);
                       
                       int second = cal.get(Calendar.SECOND);
                       int minute = cal.get(Calendar.MINUTE);
@@ -216,29 +262,16 @@ public class MuonSachController implements Initializable {
               }};
          clock.start();
      }
+     public int ktTraTT(int id)
+     {
+         int kt=0;
+         for(int m:dsTra)
+         {
+             if(m==id)
+                 kt=1;
+         }
+         return kt;
+     }
   }
-//        @Override
-//        public void run() {
-//            for (;;) {
-//                
-//                    Calendar cal = Calendar.getInstance();
-//                    int month=cal.get(Calendar.MONTH);
-//                    int year=cal.get(Calendar.MONTH);
-//                    int day=cal.get(Calendar.MONTH);
-//                    
-//                    int second = cal.get(Calendar.SECOND);
-//                    int minute = cal.get(Calendar.MINUTE);
-//                    int hour= cal.get(Calendar.HOUR);
-//                    lbTime.setText(day + "/"+month+"/"+year+ " "+hour + ":" + minute + ":" + second);
-//                    try {
-//                    sleep(1000);
-//                } catch (InterruptedException ex) {
-//                    Logger.getLogger(MuonSachController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        }
-//         });
-//    };
-//    clock.start();
    
 
