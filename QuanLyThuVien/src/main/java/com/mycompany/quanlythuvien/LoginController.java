@@ -46,6 +46,7 @@ public class LoginController{
                 stage=(Stage)((Node)event.getSource()).getScene().getWindow();
                 scene= new Scene(root,529,374);
                 stage.setScene(scene);
+                stage.setTitle("NhanVienGUI");
                 stage.show();
                 
                 //App.setRoot("NhanVienGUI");   
@@ -77,6 +78,7 @@ public class LoginController{
                 stage=(Stage)((Node)event.getSource()).getScene().getWindow();
                 scene= new Scene(root,600,400);
                 stage.setScene(scene);
+                stage.setTitle("DocGiaGUI");
                 stage.show();
              //App.setRoot("secondary");
             }
