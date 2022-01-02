@@ -55,7 +55,7 @@ public class LoginController{
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Message");
-                alert.setHeaderText("Login failed");
+                alert.setHeaderText("Login failed.Login failed.Wrong username or password");
                 alert.showAndWait();
             }
        } 
@@ -86,7 +86,7 @@ public class LoginController{
             {
                  Alert alert = new Alert(Alert.AlertType.INFORMATION);
           alert.setTitle("Message");
-          alert.setHeaderText("Login failed");
+          alert.setHeaderText("Login failed.Wrong username or password");
           alert.showAndWait();
             }
             
