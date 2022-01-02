@@ -11,9 +11,12 @@ import com.mycompany.Services.SachServices;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -55,17 +58,8 @@ public class TraSachController implements Initializable {
        public void initialize(URL url, ResourceBundle rb)
        {   
            this.LoadTable();
-             ObservableList<Sach> list = null;
-        try {
-            list = FXCollections.observableArrayList(svc.getDSSachId(2));
-        } catch (SQLException ex) {
-            Logger.getLogger(TraCuuSachController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-          FilteredList<Sach> filterList= new FilteredList<>(list);
-      
-          this.tbSach.setItems(filterList);
-           
-           //lbTienPhat.setVisible(true);
+           currentTime();
+
           
        }
      @FXML
@@ -107,6 +101,7 @@ public class TraSachController implements Initializable {
         colViTri.setCellValueFactory(new PropertyValueFactory("ViTri"));
                 
            this.tbSach.getColumns().addAll(colMa,colTen,colTacGia,colMoTa,colNoiXB,colNamXB,colMaDM,colNgayNhap,colViTri);
+           this.tbSach.setPlaceholder(new Label("Không tìm thấy dữ liệu"));
                 
     }
     @FXML 
@@ -119,7 +114,12 @@ public class TraSachController implements Initializable {
                          alert.setHeaderText("Vui lòng nhập lại mã độc giả");
                          alert.showAndWait();
          }
+         else
+         {
+             
+         }
     }
+    @FXML
     private void loadDataTable() throws SQLException
     {
          if(MuonSachServices.ktMaDG(txtId.getText())==0)
@@ -131,8 +131,45 @@ public class TraSachController implements Initializable {
          }
          else
          {
-             
+              try {
+                  int id=Integer.parseInt(txtId.getText());
+             ObservableList<Sach> list = FXCollections.observableArrayList(svc.getDSSachId(id));
+              FilteredList<Sach> filterList= new FilteredList<>(list);
+          this.tbSach.setItems(filterList);
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(TraCuuSachController.class.getName()).log(Level.SEVERE, null, ex);
+        }
          }
         
     }
+     public void currentTime()
+     {
+         Thread clock= new Thread(){
+              @Override
+              public void run(){
+              for (;;) {
+                  try{
+                   
+                      Calendar cal = Calendar.getInstance();
+                      int month=cal.get(Calendar.MONTH)+1;
+                      int year=cal.get(Calendar.YEAR);
+                      int day=cal.get(Calendar.DATE);
+                      
+                      int second = cal.get(Calendar.SECOND);
+                      int minute = cal.get(Calendar.MINUTE);
+                      int hour= cal.get(Calendar.HOUR_OF_DAY);
+                       Platform.runLater(() -> {
+                            lbTime.setText(day + "/"+month+"/"+year+ " "+hour + ":" + minute + ":" + second);
+                       });     
+                      Thread.sleep(1000);
+//                      throw new UnsupportedOperationException("Not supported yet.");
+                      //To change body of generated methods, choose Tools | Templates.
+                  } catch (InterruptedException ex) {
+                      Logger.getLogger(MuonSachController.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+              }
+              }};
+         clock.start();
+     }
 }

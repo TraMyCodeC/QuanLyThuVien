@@ -42,11 +42,11 @@ public class SachServices {
     {
         List<Sach> ds= new ArrayList<>();
         Connection cnn;
-            String sql="SELECT * FROM sach where MaSach in(select MaSach from muonsach where MaDG=?)";
-            cnn = JDBC.getConn();
+         cnn = JDBC.getConn();
+            String sql="SELECT * FROM sach s,muonsach m where s.MaSach=m.MaSach and MaDG=?";
          PreparedStatement stm=cnn.prepareStatement(sql);
              stm.setInt(1, id);
-        ResultSet rs=stm.executeQuery(sql);
+        ResultSet rs=stm.executeQuery();
         while(rs.next())
         {
           Sach e= new Sach(rs.getInt("MaSach"),rs.getString("TenSach"),rs.getString("TacGia"),rs.getString("MoTa"),

@@ -242,7 +242,7 @@ public class MuonSachController implements Initializable {
                   try{
                      
                       Calendar cal = Calendar.getInstance();
-                      int month=cal.get(Calendar.MONTH);
+                      int month=cal.get(Calendar.MONTH)+1;
                       int year=cal.get(Calendar.YEAR);
                       int day=cal.get(Calendar.DATE);
                       
