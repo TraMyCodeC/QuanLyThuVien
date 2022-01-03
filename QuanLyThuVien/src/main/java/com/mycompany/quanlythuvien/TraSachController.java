@@ -137,7 +137,7 @@ public class TraSachController implements Initializable {
                            {
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                  alert.setTitle("Message");
-                                 alert.setHeaderText("Vui lòng chọn sách mượn");
+                                 alert.setHeaderText("Vui lòng chọn sách cần trả");
                                  alert.showAndWait(); 
                            }
                            else
