@@ -43,7 +43,7 @@ public class SachServices {
         List<Sach> ds= new ArrayList<>();
         Connection cnn;
          cnn = JDBC.getConn();
-            String sql="SELECT * FROM sach s,muonsach m where s.MaSach=m.MaSach and MaDG=?";
+            String sql="SELECT * FROM sach s,muonsach m where s.MaSach=m.MaSach and MaDG=? and NgayTra is null";
          PreparedStatement stm=cnn.prepareStatement(sql);
              stm.setInt(1, id);
         ResultSet rs=stm.executeQuery();

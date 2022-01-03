@@ -22,7 +22,7 @@ public class MuonSachServices {
     {
          int dem=0;
         Connection conn=JDBC.getConn();
-        String sql="Select COUNT(MaSach) as count from muonsach where MaDG=?";
+        String sql="Select COUNT(MaSach) as count from muonsach where MaDG=? and NgayTra is null";
         PreparedStatement stm=conn.prepareStatement(sql);
         stm.setInt(1, id);
         ResultSet rs=stm.executeQuery();

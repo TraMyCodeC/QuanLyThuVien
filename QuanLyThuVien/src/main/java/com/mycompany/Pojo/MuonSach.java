@@ -14,14 +14,12 @@ import java.time.LocalDateTime;
 public class MuonSach {
     private int maDG,maSach;
     private LocalDateTime ngayMuon,ngayTra;
-    private int tienPhat;
-    public MuonSach(int madg,int masach,LocalDateTime ngayM,LocalDateTime ngayT,int tien)
+    public MuonSach(int madg,int masach,LocalDateTime ngayM,LocalDateTime ngayT)
     {
         this.maDG=madg;
         this.maSach=masach;
         this.ngayMuon=ngayM;
         this.ngayTra=ngayT;
-        this.tienPhat=tien;
     }
 
     /**
@@ -80,17 +78,4 @@ public class MuonSach {
         this.ngayTra = ngayTra;
     }
 
-    /**
-     * @return the tienPhat
-     */
-    public int getTienPhat() {
-        return tienPhat;
-    }
-
-    /**
-     * @param tienPhat the tienPhat to set
-     */
-    public void setTienPhat(int tienPhat) {
-        this.tienPhat = tienPhat;
-    }
 }

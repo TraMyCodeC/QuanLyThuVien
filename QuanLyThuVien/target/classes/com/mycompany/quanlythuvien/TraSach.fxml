@@ -11,7 +11,7 @@
 <AnchorPane id="AnchorPane" prefHeight="633.0" prefWidth="942.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.quanlythuvien.TraSachController">
    <children>
       <TableView fx:id="tbSach" layoutY="58.0" prefHeight="560.0" prefWidth="663.0" />
-      <Button fx:id="btnTra" layoutX="701.0" layoutY="548.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="106.0" text="Trả sách" />
+      <Button fx:id="btnTra" layoutX="701.0" layoutY="548.0" mnemonicParsing="false" onAction="#traSach" prefHeight="45.0" prefWidth="106.0" text="Trả sách" />
       <Button fx:id="btnHome" layoutX="827.0" layoutY="548.0" mnemonicParsing="false" onAction="#switchToNhanVienGUI" prefHeight="46.0" prefWidth="106.0" text="Home" />
       <TextField fx:id="txtId" layoutX="737.0" layoutY="100.0" prefHeight="26.0" prefWidth="86.0" />
       <Label layoutX="666.0" layoutY="104.0" text="Mã độc giả" />
@@ -27,11 +27,12 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lbTienPhat" layoutX="682.0" layoutY="474.0" prefHeight="46.0" prefWidth="242.0" style="-fx-text-fill: #ff0000;" text="Tiền phạt:">
+      <Label fx:id="lbTienPhat" layoutX="727.0" layoutY="474.0" prefHeight="46.0" prefWidth="197.0" style="-fx-text-fill: #ff0000;" text="0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Button fx:id="btnFind" layoutX="844.0" layoutY="100.0" mnemonicParsing="false" onAction="#loadDataTable" prefHeight="26.0" prefWidth="67.0" text="Find" />
+      <Label layoutX="669.0" layoutY="489.0" prefHeight="18.0" prefWidth="58.0" text="Tiền phạt" />
    </children>
 </AnchorPane>

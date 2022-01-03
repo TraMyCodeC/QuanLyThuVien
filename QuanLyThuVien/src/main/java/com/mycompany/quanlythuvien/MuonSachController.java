@@ -120,7 +120,7 @@ public class MuonSachController implements Initializable {
                 }
                 else
                 {
-                   if(MuonSachServices.ktSoSachNguoiMuon(id)==MuonSachServices.ktSoSachDaTra(id))
+                   if(MuonSachServices.ktSoSachNguoiMuon(id)==MuonSachServices.ktSoSachDaTra(id)||MuonSachServices.ktSoSachNguoiMuon(id)==0)
                    {
                        if(dsTra.size()>0)
                        {
