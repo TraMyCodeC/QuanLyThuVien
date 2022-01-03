@@ -28,7 +28,6 @@ import javafx.stage.Stage;
  */
 public class THeDocGiaController implements Initializable {
      @FXML private Button btnBack;
-     @FXML private Button btnsave;
     @FXML private TextField txtMa;
     @FXML private TextField txtTen;
     @FXML private TextField txtGioiTinh;
@@ -47,6 +46,7 @@ public class THeDocGiaController implements Initializable {
                 stage=(Stage)((Node)event.getSource()).getScene().getWindow();
                 scene= new Scene(root);
                 stage.setScene(scene);
+                 stage.setResizable(false);
                 stage.show();
     }
     @Override

@@ -47,6 +47,7 @@ public class LoginController{
                 scene= new Scene(root,529,374);
                 stage.setScene(scene);
                 stage.setTitle("NhanVienGUI");
+                 stage.setResizable(false);
                 stage.show();
                 
                 //App.setRoot("NhanVienGUI");   
@@ -79,6 +80,7 @@ public class LoginController{
                 scene= new Scene(root,600,400);
                 stage.setScene(scene);
                 stage.setTitle("DocGiaGUI");
+                 stage.setResizable(false);
                 stage.show();
              //App.setRoot("secondary");
             }

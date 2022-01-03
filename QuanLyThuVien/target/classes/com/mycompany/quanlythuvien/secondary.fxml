@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="721.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.quanlythuvien.THeDocGiaController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.quanlythuvien.THeDocGiaController">
    <children>
-      <Button fx:id="btnBack" layoutX="441.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchToDocGiaGUI" prefHeight="39.0" prefWidth="102.0" text="Trở về" />
-      <Button fx:id="btnsave" layoutX="105.0" layoutY="322.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="102.0" text="Lưu thông tin" />
+      <Button fx:id="btnBack" layoutX="502.0" layoutY="315.0" mnemonicParsing="false" onAction="#switchToDocGiaGUI" prefHeight="39.0" prefWidth="102.0" text="Trở về" />
       <AnchorPane layoutX="25.0" layoutY="19.0" prefHeight="45.0" prefWidth="693.0">
          <children>
             <Label layoutY="14.0" text="Mã độc giả:" />

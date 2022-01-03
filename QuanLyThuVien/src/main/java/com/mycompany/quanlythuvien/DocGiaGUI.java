@@ -25,6 +25,7 @@ public class DocGiaGUI {
                 stage=(Stage)((Node)event.getSource()).getScene().getWindow();
                 scene= new Scene(root);
                 stage.setScene(scene);
+                stage.setResizable(false);
                 stage.setTitle("Login");
                 stage.show();
     }
@@ -35,6 +36,7 @@ public class DocGiaGUI {
                 scene= new Scene(root,721,403);
                 stage.setScene(scene);
                 stage.setTitle("TheDocGia");
+                 stage.setResizable(false);
                 stage.show(); 
     }
     @FXML
@@ -44,6 +46,7 @@ public class DocGiaGUI {
                 scene= new Scene(root,942,633);
                 stage.setScene(scene);
                 stage.setTitle("Tra cứu sách");
+                 stage.setResizable(false);
                 stage.show(); 
     }
     public static void inIt(DocGia dg)

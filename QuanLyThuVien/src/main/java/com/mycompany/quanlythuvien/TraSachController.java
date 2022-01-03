@@ -83,6 +83,7 @@ public class TraSachController implements Initializable {
                          stage=(Stage)((Node)event.getSource()).getScene().getWindow();
                          scene= new Scene(root,529,374);
                          stage.setScene(scene);
+                          stage.setResizable(false);
                          stage.show();
             }
     private void LoadTable()
