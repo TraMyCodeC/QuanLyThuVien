@@ -13,13 +13,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
 public class LoginController{
       @FXML private TextField txtName;
-      @FXML private TextField txtPass;
+      @FXML private PasswordField txtPass;
       @FXML private Button btnDocGia;
       @FXML private Button btnNhanVien;
 //      static int m=0;
@@ -77,7 +78,7 @@ public class LoginController{
                 alert.showAndWait();
                   root=FXMLLoader.load(getClass().getResource("DocGiaGUI.fxml"));
                 stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-                scene= new Scene(root,600,400);
+                scene= new Scene(root,535,313);
                 stage.setScene(scene);
                 stage.setTitle("DocGiaGUI");
                  stage.setResizable(false);

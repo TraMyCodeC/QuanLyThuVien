@@ -6,7 +6,7 @@
 <AnchorPane id="AnchorPane" prefHeight="374.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.quanlythuvien.NHanVienGUIController">
    <children>
       <Button fx:id="btnLogout" layoutX="25.0" layoutY="333.0" mnemonicParsing="false" onAction="#loggOut" prefHeight="26.0" prefWidth="106.0" text="LogOut" />
-      <AnchorPane layoutX="25.0" layoutY="68.0" prefHeight="246.0" prefWidth="447.0" style="-fx-background-color: #d5bbfe;">
+      <AnchorPane layoutX="25.0" layoutY="68.0" prefHeight="246.0" prefWidth="447.0" style="-fx-background-color: #ff6347;">
          <children>
             <AnchorPane layoutX="241.0" prefHeight="246.0" prefWidth="236.0">
                <children>

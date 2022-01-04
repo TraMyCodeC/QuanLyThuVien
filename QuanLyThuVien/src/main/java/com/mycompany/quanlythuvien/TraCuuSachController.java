@@ -76,7 +76,7 @@ public class TraCuuSachController implements Initializable {
     private void switchToDocGiaGUI(ActionEvent event) throws IOException {
          root=FXMLLoader.load(getClass().getResource("DocGiaGUI.fxml"));
                 stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-                scene= new Scene(root);
+                scene= new Scene(root,535,313);
                 stage.setScene(scene);
                  stage.setResizable(false);
                 stage.show();
