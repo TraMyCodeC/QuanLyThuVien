@@ -70,7 +70,7 @@ public class MuonSachServices {
         else
             return 1;
     }
-    public static int ktMaDG(String id) throws SQLException//mã trống thì trả về 0,ngược lại trả về 1
+    public static int ktMaDG(String id) throws SQLException//mã để trống hoặc mã không tồn tại thì trả về 0,ngược lại trả về 1
     {
         
         if("".equals(id))

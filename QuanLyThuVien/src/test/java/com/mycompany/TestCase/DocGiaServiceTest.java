@@ -63,4 +63,12 @@ public class DocGiaServiceTest {
            Logger.getLogger(DocGiaServiceTest.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
+    public void testGetDSDocGiaIsNotNull()
+    {
+       try {
+           Assertions.assertNotNull(d.getDSDocGia());
+       } catch (SQLException ex) {
+           Logger.getLogger(DocGiaServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+       }
+    }
 }
